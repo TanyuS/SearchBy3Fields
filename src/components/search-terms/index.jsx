@@ -10,9 +10,9 @@ class SearchTerms extends Component {
 		return(
 			<div>
 				<Search/>
-				<FilterElement name="speciality" list={specialityList}/>
-				<FilterElement name="section" list={sectionList}/>
-				<FilterElement name="audience" list={audienceList}/>
+				<FilterElement type="speciality" list={specialityList}/>
+				<FilterElement type="section" list={sectionList}/>
+				<FilterElement type="audience" list={audienceList}/>
 			</div>
 		);
 	}

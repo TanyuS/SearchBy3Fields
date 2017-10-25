@@ -4,12 +4,13 @@ import "./filter.less";
 
 class FilterElement extends Component {
 	render() {
-		const {list, name} = this.props;
+		const {list, type} = this.props;
 		return(
-			<select>
+			<select id={type}>
+				<FilterOption text={'All ' + type} name="0"/>
 				{
 					list.map(el => (
-						<FilterOption text={el} name={el}/>
+						<FilterOption text={el.name} name={el.id}/>
 					))
 				}
 			</select>

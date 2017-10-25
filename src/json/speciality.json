@@ -1,1 +1,14 @@
-["Math", "Chemistry", "Philosophy"]
+[
+  {
+    "name": "Math",
+    "id": 1
+  },
+  {
+    "name": "Chemistry",
+    "id": 2
+  },
+  {
+    "name": "Philosophy",
+    "id": 3
+  }
+]

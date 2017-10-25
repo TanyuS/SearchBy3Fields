@@ -1,1 +1,14 @@
-["Case Study", "Product Information", "Abstract summary"]
+[
+  {
+    "name": "Case Study",
+    "id": 1
+  },
+  {
+    "name": "Product Information",
+    "id": 2
+  },
+  {
+    "name": "Abstract summary",
+    "id": 3
+  }
+]
