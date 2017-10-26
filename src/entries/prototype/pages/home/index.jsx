@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import SearchTerms from '../../../../components/search-terms/index'
-
+import SearchTerms from '../../../../components/search-terms/index';
+import Result from '../../../../components/result/index';
 
 
 class HomePage extends Component {
@@ -8,6 +8,7 @@ class HomePage extends Component {
 		return (
 			<div className="">
 				<SearchTerms/>
+				<Result/>
 			</div>
 		);
 	}
