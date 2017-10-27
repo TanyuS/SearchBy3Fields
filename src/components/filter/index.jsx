@@ -3,14 +3,20 @@ import FilterOption from "./filter-option/index";
 import "./filter.less";
 
 class FilterElement extends Component {
+
+	constructor(props) {
+		super(props);
+		const {list, type} = props;
+		this.state = {list, type};
+		this.changeSettings = this.props.changeSettings;
+	}
 	render() {
-		const {list, type} = this.props;
 		return(
-			<select id={type}>
-				<FilterOption text={'All ' + type} name="0"/>
+			<select id={this.state.type} onChange={this.changeSettings}>
+				<FilterOption text={'All ' + this.state.type} name={0}/>
 				{
-					list.map(el => (
-						<FilterOption text={el.name} name={el.id}/>
+					this.state.list.map(el => (
+						<FilterOption text={el.name} name={el.id} key={'fo_' + el.id}/>
 					))
 				}
 			</select>

@@ -6,13 +6,17 @@ import sectionList from "../../json/section.json";
 import audienceList from "../../json/audience.json";
 
 class SearchTerms extends Component {
+	constructor(props) {
+		super(props);
+		this.changeSettings = this.props.changeSettings;
+	}
 	render() {
 		return(
 			<div>
-				<Search/>
-				<FilterElement type="speciality" list={specialityList}/>
-				<FilterElement type="section" list={sectionList}/>
-				<FilterElement type="audience" list={audienceList}/>
+				<Search changeSettings={this.changeSettings.bind(this)}/>
+				<FilterElement type="speciality" list={specialityList} changeSettings={this.changeSettings.bind(this)}/>
+				<FilterElement type="section" list={sectionList} changeSettings={this.changeSettings.bind(this)}/>
+				<FilterElement type="audience" list={audienceList} changeSettings={this.changeSettings.bind(this)}/>
 			</div>
 		);
 	}

@@ -24,7 +24,7 @@ class Group extends Component {
 						this.state.elements.map((el, i) => {
 							if (this.state.short == true && i >= 3) return false;
 							return(
-								<GroupElement info={el}/>
+								<GroupElement info={el} key={'ge_' + i}/>
 							)
 						})
 					}

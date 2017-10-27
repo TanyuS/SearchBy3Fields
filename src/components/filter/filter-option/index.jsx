@@ -1,10 +1,14 @@
 import React, {Component} from "react";
 
 class FilterOption extends Component {
-	render() {
+	constructor(props) {
+		super(props);
 		const {text, name} = this.props;
+		this.state = {text, name};
+	}
+	render() {
 
-		return(<option name={name}>{text}</option>);
+		return(<option name={this.state.name}>{this.state.text}</option>);
 	}
 }
 
