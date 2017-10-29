@@ -1,5 +1,9 @@
 [
   {
+    "name": "All audience",
+    "id": 0
+  },
+  {
     "name": "online",
     "id": 1
   },

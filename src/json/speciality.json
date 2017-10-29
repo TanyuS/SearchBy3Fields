@@ -1,5 +1,9 @@
 [
   {
+    "name": "All speciality",
+    "id": 0
+  },
+  {
     "name": "Math",
     "id": 1
   },
