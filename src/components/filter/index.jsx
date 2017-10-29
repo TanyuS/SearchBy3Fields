@@ -13,7 +13,6 @@ class FilterElement extends Component {
 	render() {
 		return(
 			<select id={this.state.type} onChange={this.changeSettings}>
-				<FilterOption text={'All ' + this.state.type} name={0}/>
 				{
 					this.state.list.map(el => (
 						<FilterOption text={el.name} name={el.id} key={'fo_' + el.id}/>

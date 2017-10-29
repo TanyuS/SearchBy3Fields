@@ -15,20 +15,79 @@ class Result extends Component {
 
 		const settings = {
 			"inputValue": "",
-			"specialityId": 0,
-			"sectionId": 0,
-			"audienceId": 0
+			"speciality": 0,
+			"section": 0,
+			"audience": 0
 		};
 		this.state = {displayedSections, displayedResult, short: true, settings};
 	}
 	changeSettings(event) {
 		const lists = _.flatten([sectionList, specialityList, audienceList]);
 		const refreshedSettings = this.state.settings;
+		const oldSettings = JSON.stringify(this.state.settings);
 		const name = event.target.getAttribute('id');
 		const value = event.target.value;
 		const currentEle = _.find(lists, {"name": value});
-		refreshedSettings[name] = currentEle.id;
 
+		refreshedSettings[name] = currentEle.id;
+		this.setState({settings: refreshedSettings});
+		this.runFilter(oldSettings);
+	}
+	runFilter(oldSettings) {
+		const curSettings = this.state.settings;
+		let filterData = data,
+			counter = 0,
+			specialityMatch = '{}',
+			sectionMatch = '{}',
+			audienceMatch = '{}';
+		for (var el in curSettings) {
+			const curId = curSettings[el];
+			switch(el) {
+				case 'speciality':
+					if (curId == 0) {
+						specialityMatch = '{}';
+					} else {
+						const speciality = specialityList.filter((l) => {
+							return (l.id == curId);
+						});
+						specialityMatch = '{"' + el + '":"' + speciality[0].name + '"}';
+					}
+					break;
+
+				case 'section':
+					if (curId == 0) {
+						sectionMatch = '{}';
+					} else {
+						const section = sectionList.filter((l) => {
+							return (l.id == curId);
+						});
+
+						sectionMatch = '{"' + el + '":"' + section[0].name + '"}';
+					}
+					break;
+
+				case 'audience':
+					if (curId == 0) {
+						audienceMatch = '{}';
+					} else {
+						const audience = audienceList.filter((l) => {
+							return (l.id == curId);
+						});
+
+						audienceMatch = '{"' + el + '":"' + audience[0].name + '"}';
+					}
+					break;
+
+				default:
+					break;
+			}
+			counter++;
+		}
+		const totalFilter = Object.assign(JSON.parse(specialityMatch), JSON.parse(sectionMatch), JSON.parse(audienceMatch));
+		filterData = _.filter(filterData, _.matches(totalFilter));
+		this.setState({
+			displayedResult: filterData
+		});
 	}
 	render() {
 		let section_ = [];
