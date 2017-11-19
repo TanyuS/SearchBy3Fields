@@ -1,23 +1,16 @@
 import React, {Component} from "react";
 
 class Input extends Component {
+	constructor(props) {
+		super(props);
+		this.changeSettings = this.props.changeSettings;
+	}
 	render() {
 		return(
 			<div className="">
-				<input type="text" onChange={this.handleChange}/>
+				<input type="text" id="inputValue" onChange={this.changeSettings}/>
 			</div>
 		)
-	}
-	handleChange(event) {
-		const searchQuery = event.target.value.toLowerCase();
-		/*const displayedContacts = CONTACTS.filter(function(el) {
-			const searchValue = el.name.toLowerCase();
-			return searchValue.indexOf(searchQuery) !== -1;
-		});
-
-		this.setState({
-			displayedContacts: displayedContacts
-		});*/
 	}
 }
 

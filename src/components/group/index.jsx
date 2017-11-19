@@ -7,7 +7,6 @@ class Group extends Component {
 		super(props);
 		const {elements, type, short} = props;
 		this.state = {elements, type, short};
-
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick() {
@@ -21,7 +20,7 @@ class Group extends Component {
 				</div>
 				<div className="group__content">
 					{
-						this.state.elements.map((el, i) => {
+						this.props.elements.map((el, i) => {
 							if (this.state.short == true && i >= 3) return false;
 							return(
 								<GroupElement info={el} key={'ge_' + i}/>

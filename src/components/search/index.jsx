@@ -12,7 +12,7 @@ class Search extends Component {
 			<div className="">
 				<div className="search">
 					<div className="search__title">Search the Academy by keyword:</div>
-					<Input id="inputValue" onChange={this.changeSettings.bind(this)}/>
+					<Input changeSettings={this.changeSettings.bind(this)}/>
 				</div>
 			</div>
 		)

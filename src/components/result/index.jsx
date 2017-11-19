@@ -24,22 +24,29 @@ class Result extends Component {
 	changeSettings(event) {
 		const lists = _.flatten([sectionList, specialityList, audienceList]);
 		const refreshedSettings = this.state.settings;
-		const oldSettings = JSON.stringify(this.state.settings);
 		const name = event.target.getAttribute('id');
-		const value = event.target.value;
-		const currentEle = _.find(lists, {"name": value});
 
-		refreshedSettings[name] = currentEle.id;
+		let currentEle;
+		if(name === 'inputValue') {
+			refreshedSettings[name] = event.target.value;
+		} else {
+			currentEle = _.find(lists, {"name": event.target.value});
+			refreshedSettings[name] = currentEle.id;
+		}
+
 		this.setState({settings: refreshedSettings});
-		this.runFilter(oldSettings);
+		this.runFilter();
 	}
-	runFilter(oldSettings) {
+	runFilter() {
 		const curSettings = this.state.settings;
+		console.log(this.state);
 		let filterData = data,
-			counter = 0,
+			filterSection = sectionList,
 			specialityMatch = '{}',
 			sectionMatch = '{}',
+			inputMatch = '',
 			audienceMatch = '{}';
+
 		for (var el in curSettings) {
 			const curId = curSettings[el];
 			switch(el) {
@@ -57,12 +64,15 @@ class Result extends Component {
 				case 'section':
 					if (curId == 0) {
 						sectionMatch = '{}';
+						filterSection = sectionList;
 					} else {
 						const section = sectionList.filter((l) => {
 							return (l.id == curId);
 						});
 
 						sectionMatch = '{"' + el + '":"' + section[0].name + '"}';
+						const sectionMatchFilter = '{"name":"' + section[0].name + '"}';
+						filterSection = _.filter(filterSection, _.matches(JSON.parse(sectionMatchFilter)));
 					}
 					break;
 
@@ -78,24 +88,45 @@ class Result extends Component {
 					}
 					break;
 
+				case 'inputValue':
+					inputMatch = curId;
+					break;
+
 				default:
 					break;
 			}
-			counter++;
 		}
+
 		const totalFilter = Object.assign(JSON.parse(specialityMatch), JSON.parse(sectionMatch), JSON.parse(audienceMatch));
+
 		filterData = _.filter(filterData, _.matches(totalFilter));
+		filterData = this.filterByInputText(filterData, inputMatch);
+
 		this.setState({
-			displayedResult: filterData
+			displayedResult: filterData,
+			displayedSections: filterSection,
 		});
+	}
+
+	filterByInputText(data, text) {
+		if(text === '') {
+			return data;
+		} else {
+			console.log('data', data);
+			return (
+				_.filter(data, function(item){
+					return ((item.title.indexOf(text) > -1) || (item.text.indexOf(text) > -1))
+				})
+			)
+		}
 	}
 	render() {
 		let section_ = [];
-		this.state.displayedSections.map((el, i) => {
+		this.state.displayedSections.map((el) => {
 			return (section_.push({
 				"section": el.name,
 				"data": _.filter(this.state.displayedResult, _.matches({ "section": el.name})),
-				"key": i
+				"key": el.name
 			}))
 		});
 		return(
@@ -103,9 +134,11 @@ class Result extends Component {
 				<SearchTerms changeSettings={this.changeSettings.bind(this)}/>
 				<div className="result">
 					{
-						section_.map(el => (
-							<Group elements={el.data} type={el.section} short={this.state.short} key={'group_' + el.key}/>
-						))
+						section_.map(el => {
+							if (el.data.length > 0) {
+								return <Group elements={el.data} type={el.section} short={this.state.short} key={'group_' + el.key}/>
+							}
+						})
 					}
 				</div>
 			</div>
