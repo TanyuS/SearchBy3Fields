@@ -9,11 +9,9 @@ class Search extends Component {
 	}
 	render() {
 		return(
-			<div className="">
-				<div className="search">
-					<div className="search__title">Search the Academy by keyword:</div>
-					<Input changeSettings={this.changeSettings.bind(this)}/>
-				</div>
+			<div className="search">
+				<div className="search__title">Search the Academy by keyword:</div>
+				<Input changeSettings={this.changeSettings.bind(this)}/>
 			</div>
 		)
 	}

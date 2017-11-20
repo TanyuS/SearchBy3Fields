@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import Search from "../search/index";
-import FilterElement from "../filter/index";
-import specialityList from "../../json/speciality.json";
-import sectionList from "../../json/section.json";
-import audienceList from "../../json/audience.json";
+import FilterGroup from "../filter-group/index";
+import "./settings.less";
 
 class SearchTerms extends Component {
 	constructor(props) {
@@ -12,11 +10,9 @@ class SearchTerms extends Component {
 	}
 	render() {
 		return(
-			<div>
+			<div className="settings">
 				<Search changeSettings={this.changeSettings.bind(this)}/>
-				<FilterElement type="speciality" list={specialityList} changeSettings={this.changeSettings.bind(this)}/>
-				<FilterElement type="section" list={sectionList} changeSettings={this.changeSettings.bind(this)}/>
-				<FilterElement type="audience" list={audienceList} changeSettings={this.changeSettings.bind(this)}/>
+				<FilterGroup changeSettings={this.changeSettings.bind(this)}/>
 			</div>
 		);
 	}

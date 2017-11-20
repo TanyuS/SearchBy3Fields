@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import './search-input.less'
 
 class Input extends Component {
 	constructor(props) {
@@ -7,8 +8,8 @@ class Input extends Component {
 	}
 	render() {
 		return(
-			<div className="">
-				<input type="text" id="inputValue" onChange={this.changeSettings}/>
+			<div className="search-input-block">
+				<input className="search-input" type="text" id="inputValue" onChange={this.changeSettings}/>
 			</div>
 		)
 	}

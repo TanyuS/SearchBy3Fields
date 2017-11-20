@@ -6,6 +6,7 @@ import data from '../../json/full.json';
 import sectionList from '../../json/section.json';
 import specialityList from "../../json/speciality.json";
 import audienceList from "../../json/audience.json";
+import './result.less'
 
 class Result extends Component {
 	constructor(props) {
@@ -130,7 +131,7 @@ class Result extends Component {
 			}))
 		});
 		return(
-			<div>
+			<div className="wrapper">
 				<SearchTerms changeSettings={this.changeSettings.bind(this)}/>
 				<div className="result">
 					{
