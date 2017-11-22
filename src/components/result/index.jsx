@@ -40,7 +40,7 @@ class Result extends Component {
 	}
 	runFilter() {
 		const curSettings = this.state.settings;
-		console.log(this.state);
+
 		let filterData = data,
 			filterSection = sectionList,
 			specialityMatch = '{}',

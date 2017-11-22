@@ -12,7 +12,7 @@ class FilterElement extends Component {
 	}
 	render() {
 		return(
-			<select id={this.state.type} onChange={this.changeSettings}>
+			<select className="filter-select" id={this.state.type} onChange={this.changeSettings}>
 				{
 					this.state.list.map(el => (
 						<FilterOption text={el.name} name={el.id} key={'fo_' + el.id}/>
